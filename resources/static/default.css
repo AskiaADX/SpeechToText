@@ -1,0 +1,10 @@
+.adc-default ul,
+.adc-default li
+{
+    margin  : 0;
+    padding : 0;
+}
+.adc-default ul
+{
+    list-style-type: none;
+}

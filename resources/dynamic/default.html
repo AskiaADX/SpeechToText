@@ -1,0 +1,60 @@
+<!-- fallback_numeric.html -->
+{%
+Dim ar = CurrentQuestion.ParentLoop.AvailableResponses
+%}
+
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+
+<div id="adc_{%= CurrentADC.InstanceId %}" class="adc-default">
+    {% If CurrentQuestion.Type = "open" Then
+
+	Dim placeholder = CurrentADC.PropValue("placeholder")
+	Dim attrPlaceholder = On(placeholder <> "", "placeholder=\"" + placeholder + "\"", "")
+	Dim attrRequired = On(CurrentQuestion.IsAllowDK, "required=\"required\"", "")
+    Dim startVal = ""
+
+%}
+
+<div id="warning_{%= CurrentADC.InstanceId %}" class="message" style="display: none;"></div>
+
+<div id="speech-container" class="nav-wrapper speech-container_{%= CurrentADC.InstanceId %}">
+    <div id="message_{%= CurrentADC.InstanceId %}" class="message">Click "Talk" and begin speaking.</div>
+    <div id="answerContainer_{%= CurrentADC.InstanceId %}" style="display: none;">
+        <textarea name="{%= CurrentQuestion.Iteration(ar[1].Index).InputName()%}" class="todo_{%= CurrentADC.InstanceId %}" id="final_answer_{%= CurrentADC.InstanceId %}" rows="250" cols="250"> </textarea>
+    </div>
+    
+    <br/>
+    <div class="controls row">
+        <select id="language_{%= CurrentADC.InstanceId %}" class="myButton_{%= CurrentADC.InstanceId %} col s3">
+            <option value="en-GB">English</option>
+            <option value="fr-FR">Français</option>
+            <option value="de-DE">Deutsch</option>
+            <option value="es-ES">Español</option>
+        </select>
+        <button id="talk_button_{%= CurrentADC.InstanceId %}" class="myButton_{%= CurrentADC.InstanceId %} waves-effect waves-light btn col offset-s1" onclick="talkWithApp(event, {%= CurrentADC.InstanceId %})"><i id="icon_{%= CurrentADC.InstanceId %}" class="material-icons">mic</i></button>
+        <button class="waves-effect waves-light btn-floating offset-s12 grey" onclick="hideShow({%= CurrentADC.InstanceId %})"><i id="icon_vis_{%= CurrentADC.InstanceId %}" class="material-icons">visibility</i></button>
+  		<script>
+     		$(document).ready(function() {
+        		$('select').material_select();
+    		});
+  		</script>
+    </div>
+    <div>
+        
+        
+        <br/>
+  		<div class="divider"></div>
+        <script>initRecognition({%= CurrentADC.InstanceId %}, "{%= CurrentADC.PropValue("translateText")%}", "{%= CurrentADC.PropValue("targetLanguage") %}", "{%= CurrentADC.PropValue("emotionAnalysis") %}", "{%= CurrentADC.PropValue("sentimentAnalysis")%}");</script>
+        <textarea hidden id="sentiment_{%= CurrentADC.InstanceId %}" name="{%= CurrentQuestion.Iteration(ar[2].Index).InputName()%}"></textarea>
+        <textarea hidden id="emotion_{%= CurrentADC.InstanceId %}" name="{%= CurrentQuestion.Iteration(ar[3].Index).InputName()%}"></textarea>
+        {% If CurrentADC.PropValue("doAnalysis") = "1" Then %}
+   			<div id='wait' class="message"> Please wait for the sentiment analysis to be done... </div>
+    	{%EndIf%}
+    </div>
+</div>
+{% EndIf %}
+</div>
+
+
+

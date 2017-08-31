@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<control  xmlns="http://www.askia.com/2.0.0/ADCSchema"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://www.askia.com/2.0.0/ADCSchema https://raw.githubusercontent.com/AskiaADX/ADXSchema/2.0.0/ADCSchema.xsd"
+          version="2.0.0"
+          askiaCompat="5.3.3">
+  <info>
+    <name>adc2-SpeechToText</name>
+    <guid>c2a3920b-e1fa-4c75-98fd-ee438552c23e</guid>
+    <version>1.0.0</version>
+    <date>2017-05-08</date>
+    <description><![CDATA[Speech to Text ADC, features :
+				-Speech to Text
+				-Translation
+				-Sentiment Analysis
+				-Emotion Analysis]]></description>
+    <company>Askia</company>
+    <author><![CDATA[Clément Salomon <clement@askia.com>]]></author>
+    <site>http://www.askia.com/</site>
+    <helpURL></helpURL>
+    <categories>
+      <category>General</category>
+    </categories>
+    <style width="400" height="300" />
+    <constraints>
+      <constraint on="questions" single="false" multiple="false" numeric="false" date="false" open="true" chapter="false" requireParentLoop="true" />
+      <constraint on="controls" responseblock="true" checkbox="false" label="false" listbox="false" radiobutton="false" textbox="false" />
+      <constraint on="responses" max="3" min="3" />
+    </constraints>
+  </info>
+  <outputs defaultOutput="standard">
+    <output id="standard">
+      <description><![CDATA[Output when the browser support Javascript]]></description>
+      <content fileName="default.html" type="html" mode="dynamic" position="placeholder" />
+      <content fileName="standard.js" type="javascript" mode="dynamic" position="head" />
+      <content fileName="default.css" type="css" mode="dynamic" position="head" />
+      <content fileName="materialize.min.js" type="javascript" mode="static" position="head" />
+      <content fileName="materialize.min.css" type="css" mode="static" position="head" />
+    </output>
+  </outputs>
+  <properties>
+    <category id="general" name="General">
+      <property xsi:type="standardProperty" id="placeholder" name="Placeholder" type="string" mode="dynamic">
+        <description><![CDATA[Using HTML 5, in modern browser. Helper text shows in the input when it is empty.]]></description>
+        <value></value>
+      </property>
+      <property xsi:type="standardProperty" id="fontSize" name="Font Size" type="string" mode="static">
+        <description><![CDATA[The font size for the control]]></description>
+        <value><![CDATA[14px]]></value>
+      </property>
+      <property xsi:type="standardProperty" id="controlWidth" name="Control Width" type="string" mode="static">
+        <description><![CDATA[The width of the control]]></description>
+        <value><![CDATA[100%]]></value>
+      </property>
+      <property xsi:type="standardProperty" id="maxWidth" name="Max Width" type="string" mode="static">
+        <description><![CDATA[The maximum width of the control]]></description>
+        <value><![CDATA[100%]]></value>
+      </property>
+      <property xsi:type="standardProperty" id="controlAlign" name="Control Alignment" type="string" mode="static" require="false" visible="true">
+        <description><![CDATA[The alignment of the control]]></description>
+        <value><![CDATA[left]]></value>
+        <options>
+          <option value="left" text="Left" />
+          <option value="center" text="Center" />
+          <option value="right" text="Right" />
+        </options>
+      </property>
+      <property xsi:type="standardProperty" id="bgColor" name="background color" type="color" require="false" visible="true" colorFormat="hexa">
+        <description><![CDATA[Set the background color of the adc]]></description>
+        <value><![CDATA[255,255,255]]></value>
+      </property>
+      <property xsi:type="standardProperty" id="fontColor" name="font color" type="color" require="false" visible="true" colorFormat="rgb">
+        <description><![CDATA[Set the color of the font in the ADC]]></description>
+        <value><![CDATA[0,0,0]]></value>
+      </property>
+      <property xsi:type="standardProperty" id="hoverColor" name="Button hover color" type="color" require="false" visible="true" colorFormat="rgb">
+        <description><![CDATA[sets the hover button color property]]></description>
+        <value><![CDATA[246,246,246]]></value>
+      </property>
+      <property xsi:type="standardProperty" id="borderColor" name="Button border color" type="color" require="false" visible="true" colorFormat="rgb">
+        <description><![CDATA[Sets the color for the borders of the buttons]]></description>
+        <value></value>
+      </property>
+      <property xsi:type="standardProperty" id="translateText" name="Text translation" type="string" mode="dynamic" require="true" visible="true">
+        <description><![CDATA[Boolean who defines if the text will be translated. It's actually a string so set that to true or false (if not, it will take that as false value).]]></description>
+        <value><![CDATA[false]]></value>
+      </property>
+      <property xsi:type="standardProperty" id="targetLanguage" name="Target language for translation" type="string" mode="dynamic" require="true" visible="true" pattern="^[a-z]{2}$">
+        <description><![CDATA[Defines the target language for the translation (Might be the 2 first letters of the word of you language in its own language).]]></description>
+        <value><![CDATA[en]]></value>
+      </property>
+      <property xsi:type="standardProperty" id="emotionAnalysis" name="Emotion Analysis" type="string" require="false" visible="true">
+        <description><![CDATA[Set to true if you want to get emotion analysis]]></description>
+        <value><![CDATA[false]]></value>
+      </property>
+      <property xsi:type="standardProperty" id="sentimentAnalysis" name="Sentiment Analysis" type="string" require="false" visible="true">
+        <description><![CDATA[Set to true if you want to get sentiment analysis]]></description>
+        <value><![CDATA[false]]></value>
+      </property>
+      <property xsi:type="standardProperty" id="doAnalysis" name="Activate Analysis" type="string" mode="static" require="false" visible="true">
+        <description><![CDATA[]]></description>
+        <value></value>
+        <options>
+          <option value="0" text="No" />
+          <option value="1" text="Yes" />
+        </options>
+      </property>
+    </category>
+  </properties>
+</control>
